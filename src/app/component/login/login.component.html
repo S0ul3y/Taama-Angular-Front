@@ -1,0 +1,26 @@
+<div class="body">
+    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">{{ errorMessage }}</div>
+    <div class="login">
+        <img src="assets/images/logo.png" alt="logo">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="parent">
+                <i class="fa-solid fa-envelope"></i>
+                <input formControlName="username" type="text" name="username" placeholder="email ou username" required>
+            </div>
+            <!-- <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+                <small>Le nom d'utilisateur est requis.</small>
+            </div> -->
+            <div class="parent">
+                <i class="fa-solid fa-lock"></i>
+                
+                <input formControlName="password" [type]="isPasswordVisible ? 'text' : 'password'" id="passwordInput" name="password" placeholder="password" maxlength="8" required>
+
+                <i class="fa-solid fa-eye" id="show" (click)="togglePassword()" *ngIf="!isPasswordVisible"></i>
+                <i class="fa-solid fa-eye-slash" id="hide" (click)="togglePassword()" *ngIf="isPasswordVisible"></i>
+            </div>
+
+
+            <input type="submit" [disabled]="loginForm.invalid" value="Connexion">
+        </form>
+    </div>
+</div>

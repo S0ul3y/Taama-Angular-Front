@@ -1,0 +1,104 @@
+<div class="Contenaire">
+    <div class="head">
+        <H1>Liste des voyages</H1>
+
+        <div class="profile">
+            <app-profile class="app-profile"></app-profile>
+        </div>
+
+    </div>
+
+    <div class="btn">
+        <app-recherche></app-recherche>
+        <div *ngIf="role==='AdminA'" class="Addbtn" (click)="afficher()">
+            <i class="fa-solid fa-plus"></i>
+            Ajouter
+        </div>
+    </div>
+
+    <div class="table">
+        <table>
+            <tr>
+                <th>id</th>
+                <th>Compagnie</th>
+                <th>v_départ</th>
+                <th>v_arrivée</th>
+                <th>jour</th>
+                <th>heure</th>
+                <th>Prix</th>
+                <th>nbr_place</th>
+                <th>Statut</th>
+                <th>Action</th>
+            </tr>
+
+            <tr *ngFor="let V of voyages">
+                <td>{{V.id}}</td>
+                <td>{{V.compagnie?.nom}}</td>
+                <td>{{V.ville_depart}}</td>
+                <td>{{V.ville_arrivee}}</td>
+                <td>{{V.jour}}</td>
+                <td>{{V.heure}}</td>
+                <td>{{V.prix}}</td>
+                <td>{{V.nbr_place}}</td>
+                <td><span [ngClass]="{ 'bloquer': V.bloquer}">{{ V.statut }}</span></td>
+                <td>
+                    <i (click)="editVoyage(V)" class="fa-solid fa-pen-to-square"></i>
+                    <!-- <i class="fa-solid fa-pen-to-square"></i> -->
+                    <i class="fa-solid fa-trash" (click)="deleteVoyage(V.id!)"></i>
+                </td>
+            </tr>
+            
+            <!-- <tr>
+                <td>1</td>
+                <td>076854</td>
+                <td>Bamako</td>
+                <td>Kaye</td>
+                <td>Lundi</td>
+                <td>10:45</td>
+                <td>100</td>
+                <td>
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <i class="fa-solid fa-trash"></i>
+                </td>
+            </tr> -->
+            
+        </table>
+    </div>
+
+    <div class="popup" *ngIf="visible">
+        <div class="formContent">
+
+            <i class="fa-solid fa-xmark" (click)="cacher()"></i>
+
+            <H1>Ajouter un voyage</H1>
+            <form [formGroup]="VoyageForm" (ngSubmit)="Onsubmit()">
+                <!-- <input type="text" placeholder="Ville de départ">
+                <input type="text" placeholder="Ville d'arrivée"> -->
+                <select formControlName="v_depart">
+                    <option value="" disabled selected hidden>Ville de départ</option>
+                    <option *ngFor="let ville1 of villes" [ngValue]="ville1.ville">{{ville1.ville}}</option>
+                    <!-- <option value="">Mardi</option> -->
+                </select>
+
+                <select formControlName="v_arrivee">
+                    <option value="" disabled selected hidden>Ville d'arrivée</option>
+                    <option *ngFor="let ville2 of villes" [ngValue]="ville2.ville">{{ville2.ville}}</option>
+                    <!-- <option value="">Mardi</option> -->
+                </select>
+
+                <select formControlName="jour">
+                    <option value="" disabled selected hidden>Jour</option>
+                    <option *ngFor="let jour of jours" [ngValue]="jour.jour">{{jour.jour}}</option>
+                </select>
+                <input formControlName="heure" type="time" placeholder="heure">
+                <input formControlName="prix" type="number" min="0" placeholder="Prix">
+                <input formControlName="nbr_place" min="0" type="number" placeholder="nombre de place">
+                
+                <!-- <input type="submit" value="Ajouter"> -->
+                <input type="submit" [value]="edit ? 'Modifier' : 'Ajouter'">
+
+            </form>
+        </div>
+    </div>
+    
+</div>

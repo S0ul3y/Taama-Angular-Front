@@ -1,0 +1,198 @@
+<div class="Contenaire">
+        <div class="head">
+            <H1>Liste des reservations</H1>
+
+            <div class="profile">
+                <app-profile class="app-profile"></app-profile>
+            </div>
+
+        </div>
+
+        <div class="btn">
+            <div class="recherche">
+                <app-recherche></app-recherche>
+            </div>
+            <!-- <div class="Addbtn">
+                <i class="fa-solid fa-plus"></i>
+                Ajouter
+            </div> -->
+        </div>
+
+        <div class="jour">
+            <span (click)="Lundi()" [ngClass]="{'active':lundi}">Lun</span>
+            <span (click)="Mardi()" [ngClass]="{'active':mardi}">Mar</span>
+            <span (click)="Mercredi()" [ngClass]="{'active':mercredi}">Mer</span>
+            <span (click)="Jeudi()" [ngClass]="{'active':jeudi}">Jeu</span>
+            <span (click)="Vendredi()" [ngClass]="{'active':vendredi}">Ven</span>
+            <span (click)="Samedi()" [ngClass]="{'active':samedi}">Sam</span>
+            <span (click)="Dimanche()" [ngClass]="{'active':dimanche}">Dim</span>
+        </div>
+
+<div class="Allvoyage">
+    <div class="voyage" *ngFor="let V of voyages">
+        <div class="fond">
+            <img src="assets/images/bus1.png" alt="">
+        </div>
+    
+        <div class="info1">
+            <span>Départ: {{V.ville_depart}}</span>
+            <span>Arrivée: {{V.ville_arrivee}}</span>
+        </div>
+    
+        <div class="info1">
+            <span>Heure: {{V.heure}}</span>
+            <span>Jour: {{V.jour}}</span>
+        </div>
+    
+        <div class="btns">
+            <span *ngIf="role==='AdminA'" (click)="afficher(V)">Reserver</span>
+            <span (click)="getReservation(V.id!)">Liste</span>
+        </div>
+    </div>
+</div>
+        
+
+        
+
+
+
+
+
+        <div class="popup" *ngIf="visible">
+            <div class="formContent">
+        
+                <i class="fa-solid fa-xmark" (click)="cacher()"></i>
+        
+                <H1>Ajouter une Reservation</H1>
+                <form [formGroup]="ReservForm" (ngSubmit)="Reservation()">
+                    <input formControlName="Nom" type="text" placeholder="Nom">
+                    <input formControlName="Prenom" type="text" placeholder="Prenom">
+                    <input formControlName="telephone" type="tel" placeholder="Téléphone" maxlength="8">
+                    <select formControlName="DateVoyage" required>
+                        <option value="" disabled>Date de voyage</option>
+                        <option *ngFor="let date of datesDisponibles" [value]="date">
+                            {{ date }}
+                        </option>
+                    </select>
+                
+                    <input type="submit" value="Ajouter">
+        
+                </form>
+            </div>
+        </div>
+
+
+        <div class="listepopup" *ngIf="liste">
+            
+        <i class="fa-solid fa-xmark back" (click)="hideliste()"></i>
+
+        <div class="content">
+            <div class="btn">
+                <app-recherche></app-recherche>
+                <div class="Addbtn" >
+                    <!-- <i class="fa-solid fa-plus"></i> -->
+                    Imprimer la liste
+                </div>
+            </div>
+            
+            <div class="table">
+                <table>
+                    <tr>
+                        <th>id</th>
+                        <th>code</th>
+                        <th>Prenom</th>
+                        <th>Nom</th>
+                        <th>Téléphone</th>
+                        <th *ngIf="role==='AdminA'">Action</th>
+                    </tr>
+            
+                    <tr *ngFor="let R of reservation">
+                        <td>{{R.id}}</td>
+                        <td>{{R.code}}</td>
+                        <td>{{R.client?.prenom}}</td>
+                        <td>{{R.client?.nom}}</td>
+                        <td>{{R.client?.telephone}}</td>
+                        <!-- <td>+223 98101237</td>
+                        <td>+223 98101237</td> -->
+                        <!-- <td>
+                            <div><span></span></div>
+                        </td> -->
+                        <td *ngIf="role==='AdminA'">
+                            <i class="fa-solid fa-ticket" (click)="Showbillet(R.id!)"></i>
+                        </td>
+                    </tr>
+            
+            
+            
+                </table>
+            </div>
+        </div>
+            
+        </div>
+
+
+        <div class="billet" *ngIf="billet">
+            <i class="fa-solid fa-xmark back" (click)="Hidebillet()"></i>
+            <div class="container">
+            
+                <div class="download" >
+                    <i class="fa-solid fa-download" (click)="generateImageAndPrint()"></i>
+                </div>
+            
+                <div class="billets" #billetContent *ngIf="BilletAffiche">
+                    <h2>{{BilletAffiche.voyage?.compagnie?.nom}}</h2>
+            
+                    <div class="BlocMere">
+                        <div class="InfoZone">
+                            <span>Nom</span>
+                            <span>{{BilletAffiche.client?.prenom}} {{BilletAffiche.client?.nom}}</span>
+                        </div>
+                        <div class="InfoZone">
+                            <span>Numéro</span>
+                            <span>+223 {{BilletAffiche.client?.telephone}}</span>
+                        </div>
+                        <div class="InfoZone">
+                            <span>Départ</span>
+                            <span>{{BilletAffiche.voyage?.ville_depart}}</span>
+                        </div>
+                        <div class="InfoZone">
+                            <span>Arrivée</span>
+                            <span>{{BilletAffiche.voyage?.ville_arrivee}}</span>
+                        </div>
+                        <div class="InfoZone">
+                            <span>Heure</span>
+                            <span>{{BilletAffiche.voyage?.heure}}</span>
+                        </div>
+                        <div class="InfoZone">
+                            <span>Date</span>
+                            <span>{{BilletAffiche.voyage?.jour}} le {{BilletAffiche.date}}</span>
+                        </div>
+            
+                    </div>
+            
+                    <div class="tiret">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+            
+                    <div class="Montant">
+                        <span>Montant</span>
+                        <span>{{BilletAffiche.voyage?.prix}} F</span>
+                    </div>
+            
+                    <div class="codebar"></div>
+                    <strong>{{BilletAffiche.code}}</strong>
+            
+                </div>
+            
+                <!-- <div class="Btns">
+                    <div class="Modifier">Modifier</div>
+                    <div class="Annuler">Annuler</div>
+                </div> -->
+            
+            </div>
+        </div>
+
+
+</div>

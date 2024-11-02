@@ -1,0 +1,82 @@
+<div class="sidebar">
+    <div class="header">
+        <img src="assets/images/logo.png" alt="logo">
+        <h2>Taama</h2>
+    </div>
+
+    <div class="btnBloc">
+
+        <div class="btn" [routerLink]="['/dashboard/accueil']"
+            [ngClass]="{active: activeRoute ==='/dashboard/accueil'}">
+            <i class="fa-solid fa-border-all"></i>
+            <span class="texte">Dashboard</span>
+        </div>
+
+        <div *ngIf="role==='AdminC'" class="btn" [routerLink]="['/dashboard/admin_a']"
+            [ngClass]="{active: activeRoute ==='/dashboard/admin_a'}">
+            <i class="fa-solid fa-user"></i>
+            <span class="texte">Admin agences</span>
+        </div>
+        <!-- Dashboard -->
+
+        <!-- <div class="btn" [routerLink]="['/dashboard/utilisateurs']" [ngClass]="{active: activeRoute ==='/dashboard/utilisateurs'}">
+            <i class="fa-solid fa-user"></i>
+            <span class="texte">Utilisateur</span>
+            <i class="fa-solid fa-angle-down" id="down"></i>
+        </div> -->
+
+        <div *ngIf="role==='Admin'" class="btn" [ngClass]="{ 'WhiteBack': WhiteBack }" (click)="toogleUserliste()" >
+            <i class="fa-solid fa-user"></i>
+            <span class="texte">Utilisateur</span>
+            <i class="fa-solid fa-angle-down" id="down"></i>
+        </div>
+
+        <div class="listeUser" *ngIf="ListeUser">
+
+            <div class="btn" [routerLink]="['/dashboard/utilisateurs']"
+                [ngClass]="{active: activeRoute ==='/dashboard/utilisateurs'}">
+                <i class="fa-solid fa-user"></i>
+                <span class="texte">Client</span>
+            </div>
+
+            <div class="btn" [routerLink]="['/dashboard/admin_comp']"
+                [ngClass]="{active: activeRoute ==='/dashboard/admin_comp'}">
+                <i class="fa-solid fa-user"></i>
+                <span class="texte">Admin comp</span>
+            </div>
+
+            <div class="btn" [routerLink]="['/dashboard/admin_agence']"
+                [ngClass]="{active: activeRoute ==='/dashboard/admin_agence'}">
+                <i class="fa-solid fa-user"></i>
+                <span class="texte">Admin Agence</span>
+            </div>
+        </div>
+
+        <div *ngIf="role ==='Admin'" class="btn" [routerLink]="['/dashboard/compagnie']" [ngClass]="{active: activeRoute ==='/dashboard/compagnie'}" (click)="Affiche()">
+            <i class="fa-solid fa-building"></i>
+            <span class="texte">Compagnie</span>
+            
+        </div>
+        <div *ngIf="role ==='Admin' || role ==='AdminC'"  class="btn" [routerLink]="['/dashboard/agence']" [ngClass]="{active: activeRoute ==='/dashboard/agence'}">
+            <i class="fa-solid fa-building"></i>
+            <span class="texte">Agence</span>
+        </div>
+
+        <div class="btn" [routerLink]="['/dashboard/voyage']" [ngClass]="{active: activeRoute ==='/dashboard/voyage'}">
+            <i class="fa-solid fa-bus-simple"></i>
+            <span class="texte">Voyage</span>
+        </div>
+
+        <div class="btn" [routerLink]="['/dashboard/reservation']" [ngClass]="{active: activeRoute ==='/dashboard/reservation'}">
+            <i class="fa-solid fa-ticket-simple"></i>
+            <span class="texte">Réservation</span>
+        </div>
+    </div>
+
+    <div class="deconnexion" (click)="logout()">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span class="texte">Déconnexion</span>
+    </div>
+
+
+</div>

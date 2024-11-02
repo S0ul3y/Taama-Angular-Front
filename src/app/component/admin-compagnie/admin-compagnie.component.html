@@ -1,0 +1,90 @@
+<div class="Contenaire">
+    <div class="head">
+        <H1>Liste des admin compagnie</H1>
+
+        <div class="profile">
+            <app-profile class="app-profile"></app-profile>
+        </div>
+
+    </div>
+
+    <div class="btn">
+        <div class="recherche">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Rechercher">
+        </div>
+        <!-- <div class="Addbtn" (click)="afficher()">
+            <i class="fa-solid fa-plus"></i>
+            Ajouter
+        </div> -->
+    </div>
+
+    <div class="table">
+        <table>
+            <tr>
+                <th>id</th>
+                <th>Username</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Compagnie</th>
+                <th>Téléphone</th>
+                <th>Rôle</th>
+                <th>Statut</th>
+                <th>Action</th>
+            </tr>
+
+            <tr *ngFor="let utilisateur of adminComp">
+
+                <td>{{ utilisateur.id }}</td>
+                <td>{{ utilisateur.username }}</td>
+                <td>{{ utilisateur.nom }}</td>
+                <td>{{ utilisateur.prenom }}</td>
+                <td>{{ utilisateur.compagnie?.nom }}</td>
+                <td>{{ utilisateur.telephone }}</td>
+                <td>{{ utilisateur.role ? utilisateur.role.role : 'N/A' }}</td>
+                
+
+                <!-- <td>1</td>
+                <td>Souleymane223</td>
+                <td>Maiga</td>
+                <td>Souleymane</td>
+                <td>+223 98101237</td>
+                <td>Admin</td> -->
+                <td>
+                    <div (click)="bloquer(utilisateur.id!)" [ngClass]="{ 'bloquer': utilisateur.bloquer}"><span></span></div>
+                </td>
+                <td>
+                    <!-- <i (click)="editAdmin(utilisateur)" class="fa-solid fa-pen-to-square"></i> -->
+                    <i (click)="deleteUser(utilisateur.id!)" class="fa-solid fa-trash"></i>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+    <div class="popup" *ngIf="visible">
+        <div class="formContent">
+
+            <i class="fa-solid fa-xmark" (click)="cacher()"></i>
+
+            <H1>Ajouter un voyage</H1>
+            <form [formGroup]="AdminForm" (ngSubmit)="onSubmit()">
+                <input formControlName="nom" type="text" placeholder="Nom">
+                <input formControlName="prenom" type="text" placeholder="Prénom">
+                <input formControlName="username" type="text" placeholder="Email ou Username" required="">
+                <input formControlName="telephone" type="tel" placeholder="Telephone">
+                <!-- <select name="" id="">
+                    <option value="" disabled selected hidden>Role</option>
+                    <option value="">Agence</option>
+                    <option value="">Mardi</option>
+                </select> -->
+
+                <input formControlName="password" *ngIf="!edit" type="text" placeholder="password">
+
+                <input type="submit" [value]="edit ? 'Modifier' : 'Ajouter'">
+
+            </form>
+        </div>
+    </div>
+
+</div>

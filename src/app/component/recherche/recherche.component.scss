@@ -1,0 +1,25 @@
+.rechercher{
+            // display: none;
+            position: relative;
+            width: 300px;
+            display: flex;
+            align-items: center;
+
+            i{
+                position: absolute;
+                left: 15px;
+            }
+            input:focus{
+                // border: 0px;
+                outline: none;
+            }
+            input{
+                width: 100%;
+                padding: 14px 0px 14px 40px;
+                border-radius: 8px;
+                border: 1px solid rgba(128, 128, 128, 0.599);
+                background-color: rgb(228, 224, 224);
+                font-size: 1.1rem;
+
+            }
+        }

@@ -1,0 +1,186 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900");
+
+
+.sidebar::-webkit-scrollbar{
+    display: none;
+}
+.sidebar{
+    width: 250px;
+    height: 95vh;
+    font-family:'Poppins', sans-serif ;
+    // background-color: red; 
+    overflow-y: scroll; 
+    color: white;
+    // padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    i{
+        width: 20px;
+        font-size: 1.3rem;
+        margin-right: 10px;
+    }
+
+    .header{
+        width: 100%;
+        display: flex;
+        gap: 10px;
+        padding: 10px;
+        align-items: center;
+        img{
+            width: 80px;
+            height: 80px;
+        }
+    }
+
+    .btnBloc{
+        width: 80%;
+        height: 70%;
+        margin-left: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        // background-color: #FF7648;
+        gap: 5px;
+
+        i{
+            font-size: 1.1rem;
+            margin-right: 10px;
+        }
+
+        .btn:hover{
+            background-color: white;
+            color: #4DC591;
+        }
+        .btn{
+            position: relative;
+            display: flex;
+            cursor: pointer;
+            justify-content: flex-start;
+            align-items: center;
+            border-radius: 6px;
+            padding: 8px 8px 8px 20px;
+            // color: white;
+            // color: #4DC591;
+
+         #down{
+            display: flex;
+            align-items: center;
+            position: absolute;
+            right: 0px;
+            }
+        }
+
+        .listeUser{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-left: 20px;
+            // background-color: #48e7a2;
+            
+            .btn{
+                display: flex;
+                cursor: pointer;
+                justify-content: flex-start;
+                align-items: center;
+                border-radius: 6px;
+                padding: 5px 5px 5px 20px;
+                background-color: transparent;
+            }
+            .btn:hover{
+                background-color: white;
+                color: #4DC591;
+            }
+            .active{
+                background-color: white;
+                color: #4DC591;
+                
+            }
+        }
+
+        .WhiteBack{
+            background-color: rgb(240, 238, 238);
+            color: #4DC591;
+        }
+
+    }
+
+    .deconnexion:hover{
+        background-color: transparent;
+        color: #FF7648;
+        // box-sizing: border-box;
+        background-color: white;
+    }
+    .deconnexion{
+        width: 65%;
+        // height: max-content;
+        display: flex;
+        margin: 0 auto;
+            cursor: pointer;
+            justify-content: flex-start;
+            align-items: center;
+            border-radius: 6px;
+            padding: 10px 10px 10px 20px;
+            background-color:#FF7648 ;
+            // box-sizing: border-box;
+    }
+
+    .active{
+        background-color: white;
+        color: #4DC591;
+        
+    }
+}
+
+
+@media screen and (max-width: 900px) {
+    .sidebar{
+        width: 70px;
+        align-items: center;
+
+        .header{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img{
+                width: 60px;
+                height: 60px;
+            }
+        }
+    
+    
+    h2{
+        display: none;
+    }
+    .texte{
+        display: none;
+    }
+    .btnBloc{
+        margin: 0px;
+        width: 80%;
+        height: 70%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+
+        .btn{
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+
+    .deconnexion{
+        width: 30%;
+    }
+    
+    
+}
+    
+}

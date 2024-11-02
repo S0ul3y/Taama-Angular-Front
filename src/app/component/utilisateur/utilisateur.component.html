@@ -1,0 +1,59 @@
+<div class="Contenaire">
+    <div class="head">
+        <H1>Liste des utilisateurs</H1>
+
+        <div class="profile">
+            <app-profile class="app-profile"></app-profile>
+        </div>
+
+    </div>
+
+    <div class="btn">
+        <div class="recherche">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Rechercher">
+        </div>
+        <!-- <div class="Addbtn" (click)="afficher()">
+            <i class="fa-solid fa-plus"></i>
+            Ajouter
+        </div> -->
+    </div>
+
+    <div class="table">
+        <table>
+            <tr>
+                <th>id</th>
+                <th>image</th>
+                <th>Username</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Téléphone</th>
+                <th>Rôle</th>
+                <!-- <th>Statut</th>
+                <th>Action</th> -->
+            </tr>
+
+            <tr *ngFor="let client of utilisateur">
+                <td>{{client.id}}</td>
+                <td><img [src]="'data:image/png;base64,' + client.image"></td>
+                <td>{{client.username}}</td>
+                <td>{{client.nom}}</td>
+                <td>{{client.prenom}}</td>
+                <td>+223 {{client.telephone}}</td>
+                <td>{{client.role?.role}}</td>
+                <!-- <td><div><span></span></div></td>
+                <td>
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <i class="fa-solid fa-trash"></i>
+                </td> -->
+            </tr>
+
+
+            
+
+        </table>
+    </div>
+
+    <!--  -->
+
+</div>

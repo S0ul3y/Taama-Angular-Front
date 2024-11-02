@@ -1,0 +1,12 @@
+<div class="content">
+    <span>
+        <img src="assets/images/bus1.png" alt="">
+    </span>
+    <span>
+        <H3 *ngIf="utilisateur">
+            {{utilisateur.nom}} {{utilisateur.prenom}} <br>
+            {{utilisateur.role?.role}}
+        </H3>
+    </span>
+    <i class="fa-solid fa-caret-right"></i>
+</div>

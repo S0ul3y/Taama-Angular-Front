@@ -1,0 +1,136 @@
+<div class="Contenaire">
+    <div class="head">
+        <H1>Liste des compagnies</H1>
+
+        <div class="profile">
+            <app-profile class="app-profile"></app-profile>
+        </div>
+
+    </div>
+
+    <div class="btn">
+        <div class="recherche">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Rechercher">
+        </div>
+        <div class="Addbtn" (click)="afficher()">
+            <i class="fa-solid fa-plus"></i>
+            Ajouter
+        </div>
+    </div>
+
+    <div class="table">
+        <table>
+            <tr>
+                <th>id</th>
+                <!-- <th>Username</th> -->
+                <th>Nom</th>
+                <th>Statut</th>
+                <!-- <th>Téléphone</th>
+                <th>Rôle</th>
+                <th>Statut</th> -->
+                <th>Action</th>
+            </tr>
+
+            <tr *ngFor="let compagnie of compagnie">
+
+                <td>{{ compagnie.id }}</td>
+                <td>{{ compagnie.nom }}</td>
+                <td><span [ngClass]="{ 'bloquer': compagnie.bloquer}">{{ compagnie.statut }}</span></td>
+                <!-- <td>{{ utilisateur.nom }}</td>
+                <td>{{ utilisateur.prenom }}</td>
+                <td>{{ utilisateur.telephone }}</td>
+                <td>{{ utilisateur.role ? utilisateur.role.role : 'N/A' }}</td> -->
+
+
+                <!-- <td>1</td>
+                <td>Souleymane223</td>
+                <td>Maiga</td>
+                <td>Souleymane</td>
+                <td>+223 98101237</td>
+                <td>Admin</td> -->
+                <!-- <td>
+                    <div><span></span></div>
+                </td> -->
+                <td>
+                    <i  class="fa-solid fa-pen-to-square" (click)="editCompagnie(compagnie)"></i>
+                    <!-- <i  class="fa-solid fa-trash"></i> -->
+                    <!-- <i (click)="editAdmin(utilisateur)" class="fa-solid fa-pen-to-square"></i>
+                    <i (click)="deleteUser(utilisateur.id!)" class="fa-solid fa-trash"></i> -->
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+    <div class="popup" *ngIf="visible">
+        <div class="formContent">
+
+            <i class="fa-solid fa-xmark" (click)="cacher()"></i>
+            <p>{{erreur}}</p>
+            
+            <form [formGroup]="AdminForm" (ngSubmit)="AddCompagnie()">
+                <div *ngIf="currentStep === 1">
+                    <H1>Ajouter un admin</H1>
+                <input formControlName="nom" type="text" placeholder="Nom">
+                <input formControlName="prenom" type="text" placeholder="Prénom">
+                <input formControlName="username" type="text" placeholder="Email ou Username" required="" maxlength="20">
+                <input formControlName="telephone" type="tel" placeholder="Telephone" maxlength="8"required>
+                <!-- <select name="" id="">
+                    <option value="" disabled selected hidden>Role</option>
+                    <option value="">Agence</option>
+                    <option value="">Mardi</option>
+                </select> -->
+
+                <input formControlName="password" *ngIf="!edit" type="text" placeholder="password" maxlength="8">
+
+                <!-- <input type="submit" [value]="edit ? 'Modifier' : 'Ajouter'"> -->
+                <!-- <input type="submit" (click)="goToNextStep()" value="Suivant"> -->
+                <button (click)="goToNextStep()">Suivant</button>
+                </div>
+
+                <div *ngIf="currentStep === 2">
+                    <H1>Ajouter la compagnie</H1>
+                    <input formControlName="nomCompagnie" type="text" placeholder="Nom de la compagnie">
+                    
+                    <!-- <input formControlName="adresseCompagnie" type="text" placeholder="Adresse de la compagnie">
+                    <input formControlName="emailCompagnie" type="email" placeholder="Email de la compagnie">
+                    <input formControlName="telephoneCompagnie" type="tel" placeholder="Téléphone de la compagnie"> -->
+                
+                    <span class="formbtn">
+                        <button type="button" (click)="goToPreviousStep()">Précédent</button>
+                        <input type="submit" value="Ajouter">
+                    </span>
+                    
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Modifier formulaire -->
+
+    <div class="popup" *ngIf="Modif">
+        <div class="formContent">
+    
+            <i class="fa-solid fa-xmark" (click)="HideModif()"></i>
+            <p>{{erreur}}</p>
+    
+            <form [formGroup]="AdminForm" (ngSubmit)="updateCompagnie()">
+                <div>
+                    <H1>Modifier la compagnie</H1>
+                    <input formControlName="nomCompagnie" type="text" placeholder="Nom de la compagnie">
+                    <!-- <input formControlName="adresseCompagnie" type="text" placeholder="Adresse de la compagnie">
+                        <input formControlName="emailCompagnie" type="email" placeholder="Email de la compagnie">
+                        <input formControlName="telephoneCompagnie" type="tel" placeholder="Téléphone de la compagnie"> -->
+    
+                    <span class="formbtn">
+                        <!-- <button type="button" (click)="goToPreviousStep()">Précédent</button> -->
+                        <input type="submit" value="Modifier">
+                    </span>
+                    </div>
+            </form>
+        </div>
+    </div>
+
+</div>
